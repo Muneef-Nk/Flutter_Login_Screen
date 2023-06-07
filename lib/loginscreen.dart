@@ -8,6 +8,7 @@ class LoginUI extends StatefulWidget {
 }
 
 class _LoginUIState extends State<LoginUI> {
+  bool isPassVisible = true;
   Widget divider = SizedBox(
     height: 20,
   ) ;
@@ -52,8 +53,8 @@ class _LoginUIState extends State<LoginUI> {
             Container(
               width: MediaQuery.of(context).size.width*0.8,
               padding: EdgeInsets.symmetric(horizontal: 8),
-              child: TextField(
-                obscureText: true,
+              child: TextFormField(
+                obscureText: isPassVisible,
                 maxLength: 15,
                 style: TextStyle(
                     color: Colors.black
@@ -64,6 +65,14 @@ class _LoginUIState extends State<LoginUI> {
                   ),
                   label: Text("Password"),
                   prefixIcon: Icon(Icons.key),
+                  suffixIcon: GestureDetector(
+                    onTap: (){
+                      setState(() {
+                        isPassVisible = !isPassVisible;
+                      });
+                    },
+                      child:isPassVisible? Icon(Icons.visibility) : Icon(Icons.visibility_off)
+                  )
                 ),
               ),
             ),
@@ -75,7 +84,6 @@ class _LoginUIState extends State<LoginUI> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: (){},
                     child: Text("Forgot Paswsword",
                     style: TextStyle(
                       color: Colors.grey,
@@ -83,7 +91,7 @@ class _LoginUIState extends State<LoginUI> {
                       fontSize: 15
                     ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
